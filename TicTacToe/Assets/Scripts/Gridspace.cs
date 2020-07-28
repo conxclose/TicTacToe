@@ -28,17 +28,12 @@ public class Gridspace : MonoBehaviour
 
     public void SetSpace()
     {
-        byte xPos, yPos;
-        xPos = tileIndex.GetXPos();
-        yPos = tileIndex.GetYPos();
+        gb.UpdateGameboard(this.gameObject,1);
+    }
 
-        if (gb.CheckSpaceIsEmpty(xPos, yPos))
-        {
-            //Debug.Log("EMPTY");
-            gb.UpdateGameboard(xPos,yPos,gameController.GetPlayerIdentifier());
-            t.text = gameController.GetPlayerText();
-            b.interactable = false;
-            gameController.EndTurn();
-        }
+    public void UpdateContent()
+    {
+        t.text = gameController.GetPlayerMark();
+        b.interactable = false;
     }
 }

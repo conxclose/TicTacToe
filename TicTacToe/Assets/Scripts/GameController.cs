@@ -10,16 +10,18 @@ public class GameController : MonoBehaviour
     public GameObject gameOverPanel;
     public Text gameOverText;
 
-    private byte playerIdentifier;
-    private Gameboard gb;
+    private byte playerID;
+    private string playerMark;
     private int moveCount = 0;
 
+    private Gameboard gb;
 
     void Awake()
     {
         SetGameControllerReference();
         gameOverPanel.SetActive(false);
-        playerIdentifier = 1;
+        playerID = 1;
+        playerMark = "X";
         gb = gameBoard.GetComponent<Gameboard>();
     }
 
@@ -29,38 +31,25 @@ public class GameController : MonoBehaviour
             t.GetComponentInParent<Gridspace>().SetGameController(this);
     }
 
-    public byte GetPlayerIdentifier()
+    public string GetPlayerMark()
     {
-        return playerIdentifier;
-    }
-
-    public string GetPlayerText()
-    {
-        var identifier = "DEFAULT";
-
-        if (playerIdentifier == 1)
-            identifier = "X";
-        else if (playerIdentifier == 2)
-            identifier = "O";
-
-        return identifier;
+        return playerMark;
     }
 
     public void EndTurn()
     {
-        if (gb.CheckForWinningMove(playerIdentifier))
+        moveCount++;
+        if (gb.CheckForWinningMove(playerID))
         {
             GameOver();
             gameOverPanel.SetActive(true);
-            gameOverText.text = GetPlayerText() + " Wins!";
+           // gameOverText.text = playerMark + " Wins!";
         }
         else if(moveCount >= 9)
         {
             gameOverPanel.SetActive(true);
             gameOverText.text = "It's a Draw!";
         }
-        else
-            moveCount++;
     }
 
     void GameOver()
@@ -75,6 +64,7 @@ public class GameController : MonoBehaviour
     {
         foreach (var t in buttonList)
         {
+            moveCount = 0;
             gameOverPanel.SetActive(false);
             gameOverText.text = "";
             t.GetComponentInParent<Button>().interactable = true;

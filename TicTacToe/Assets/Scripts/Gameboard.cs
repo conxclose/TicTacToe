@@ -12,7 +12,9 @@ public class Gameboard : MonoBehaviour
     private const byte o = 2;
 
     private bool isEmpty = false;
-    private bool hasWon = false;
+
+    [SerializeField]
+    private GameController gameController;
 
     // Start is called before the first frame update
     void Start()
@@ -44,12 +46,27 @@ public class Gameboard : MonoBehaviour
         }
     }
 
-    public void UpdateGameboard(byte xPos, byte yPos, byte id)
+    public void UpdateGameboard(GameObject gridSpace, byte id)
     {
+        var index = gridSpace.GetComponent<TileIndex>();
+        var gs = gridSpace.GetComponent<Gridspace>();
+
+        byte xPos, yPos;
+        xPos = index.GetXPos();
+        yPos = index.GetYPos();
+
+        if (!CheckSpaceIsEmpty(xPos, yPos))
+        {
+            return;
+        }
+
         if (id == 1)
             boardArray[xPos, yPos] = x;
         else if (id == 2)
             boardArray[xPos, yPos] = o;
+
+        gs.UpdateContent();
+        gameController.EndTurn();
     }
 
     public bool CheckSpaceIsEmpty(byte xPos, byte yPos)
@@ -59,8 +76,7 @@ public class Gameboard : MonoBehaviour
             isEmpty = true;
             return isEmpty;
         }
-        else
-            return isEmpty;
+        return isEmpty;
     }
 
     public bool CheckForWinningMove(byte pt)
