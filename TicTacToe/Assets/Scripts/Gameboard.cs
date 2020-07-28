@@ -33,6 +33,17 @@ public class Gameboard : MonoBehaviour
         }
     }
 
+    public void ClearArray()
+    {
+        for (int i = 0; i < 3; i++)
+        {
+            for (int j = 0; j < 3; j++)
+            {
+                boardArray[i, j] = empty;
+            }
+        }
+    }
+
     public void UpdateGameboard(byte xPos, byte yPos, byte id)
     {
         if (id == 1)
