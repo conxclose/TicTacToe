@@ -1703,7 +1703,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4663494b70a739479931128a5b8b66c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameController: {fileID: 1461048935}
+  GameController: {fileID: 1461048935}
 --- !u!1001 &1235588776
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2135,6 +2135,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1461048936}
   - component: {fileID: 1461048935}
+  - component: {fileID: 1461048937}
   m_Layer: 0
   m_Name: GameController
   m_TagString: Untagged
@@ -2154,7 +2155,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ced629ab527fb342820439ed29594d5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonList:
+  ButtonList:
   - {fileID: 1589426390}
   - {fileID: 109566732}
   - {fileID: 1310304296}
@@ -2164,9 +2165,9 @@ MonoBehaviour:
   - {fileID: 2095036518}
   - {fileID: 992884092}
   - {fileID: 1554500629}
-  gameBoard: {fileID: 1200354353}
-  gameOverPanel: {fileID: 514264013}
-  gameOverText: {fileID: 2145988675}
+  GameBoard: {fileID: 1200354353}
+  GameOverPanel: {fileID: 514264013}
+  GameOverText: {fileID: 2145988675}
 --- !u!4 &1461048936
 Transform:
   m_ObjectHideFlags: 0
@@ -2181,6 +2182,21 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1461048937
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1461048934}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ab165df9f81b0841825459b3446ff3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  GameController: {fileID: 1461048935}
+  Gameboard: {fileID: 1200354357}
+  GbO: {fileID: 1200354353}
 --- !u!114 &1554500629 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 2958954395254617957, guid: 89a83beec3a11444182da4e61a2347e3,

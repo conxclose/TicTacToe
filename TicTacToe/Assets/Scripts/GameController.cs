@@ -5,56 +5,75 @@ using UnityEngine.UI;
 
 public class GameController : MonoBehaviour
 {
-    public Text[] buttonList;
-    public GameObject gameBoard;
-    public GameObject gameOverPanel;
-    public Text gameOverText;
+    public Text[] ButtonList;
+    public GameObject GameBoard;
+    public GameObject GameOverPanel;
+    public Text GameOverText;
 
-    private byte playerID;
-    private string playerMark;
-    private int moveCount = 0;
+    private byte _playerId;
+    private int _moveCount = 0;
 
-    private Gameboard gb;
+    private Gameboard _gb;
+    private TicTacToeAI _ai;
 
     void Awake()
     {
         SetGameControllerReference();
-        gameOverPanel.SetActive(false);
-        playerID = 1;
-        playerMark = "X";
-        gb = gameBoard.GetComponent<Gameboard>();
+        GameOverPanel.SetActive(false);
+        _playerId = 1;
+        _gb = GameBoard.GetComponent<Gameboard>();
+        _ai = this.gameObject.GetComponent<TicTacToeAI>();
     }
 
     void SetGameControllerReference()
     {
-        foreach (var t in buttonList)
+        foreach (var t in ButtonList)
             t.GetComponentInParent<Gridspace>().SetGameController(this);
     }
 
     public string GetPlayerMark()
     {
-        return playerMark;
+        if (_playerId == 1)
+            return "X";
+
+        if (_playerId == 2)
+            return "O";
+
+        return "!!";
+    }
+
+    public byte GetPlayerID()
+    {
+        return _playerId;
     }
 
     public void EndTurn()
     {
-        moveCount++;
-        if (gb.CheckForWinningMove(playerID))
+        _moveCount++;
+        if (_gb.CheckForWinningMove(_playerId))
         {
             GameOver();
-            gameOverPanel.SetActive(true);
-           // gameOverText.text = playerMark + " Wins!";
+            GameOverPanel.SetActive(true);
+            GameOverText.text = GetPlayerMark() + " Wins!";
         }
-        else if(moveCount >= 9)
+        else if(_moveCount >= 9)
         {
-            gameOverPanel.SetActive(true);
-            gameOverText.text = "It's a Draw!";
+            GameOverPanel.SetActive(true);
+            GameOverText.text = "It's a Draw!";
         }
+
+        if (_playerId == 1)
+        {
+            _playerId = 2;
+            _ai.MakeMove();
+        }
+        else if (_playerId == 2)
+            _playerId = 1;
     }
 
     void GameOver()
     {
-        foreach (var t in buttonList)
+        foreach (var t in ButtonList)
         {
             t.GetComponentInParent<Button>().interactable = false;
         }
@@ -62,14 +81,14 @@ public class GameController : MonoBehaviour
 
     public void RestartGame()
     {
-        foreach (var t in buttonList)
+        foreach (var t in ButtonList)
         {
-            moveCount = 0;
-            gameOverPanel.SetActive(false);
-            gameOverText.text = "";
+            _moveCount = 0;
+            GameOverPanel.SetActive(false);
+            GameOverText.text = "";
             t.GetComponentInParent<Button>().interactable = true;
             t.text = "";
-            gb.ClearArray();
+            _gb.ClearArray();
         }
     }
 }
