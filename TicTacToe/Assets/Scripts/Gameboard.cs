@@ -11,14 +11,16 @@ public class Gameboard : MonoBehaviour
     private const byte x = 1;
     private const byte o = 2;
 
-    bool isEmpty = false;
+    private bool isEmpty = false;
+    private bool hasWon = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        boardArray = new byte[3, 3] {
-            {0, 1, 2,} ,
-            {3, 4, 5,} ,
+        boardArray = new byte[3, 3]
+        {
+            {0, 1, 2,},
+            {3, 4, 5,},
             {6, 7, 8}
         };
 
@@ -31,11 +33,11 @@ public class Gameboard : MonoBehaviour
         }
     }
 
-    void UpdateGameboard(byte xPos, byte yPos, byte symbol)
+    public void UpdateGameboard(byte xPos, byte yPos, byte id)
     {
-        if (symbol == x)
+        if (id == 1)
             boardArray[xPos, yPos] = x;
-        else
+        else if (id == 2)
             boardArray[xPos, yPos] = o;
     }
 
@@ -50,9 +52,33 @@ public class Gameboard : MonoBehaviour
             return isEmpty;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool CheckForWinningMove(byte pt)
     {
-        
+        //Horizontal Top
+        if (boardArray[0, 0] == pt && boardArray[1, 0] == pt && boardArray[2, 0] == pt)
+            return true;
+        //Horizontal Middle
+        else if (boardArray[0, 1] == pt && boardArray[1, 1] == pt && boardArray[2, 1] == pt)
+            return true;
+        //Horizontal Bottom
+        else if (boardArray[0, 2] == pt && boardArray[1, 2] == pt && boardArray[2, 2] == pt)
+            return true;
+        //Diagonal L-R
+        else if (boardArray[0, 0] == pt && boardArray[1, 1] == pt && boardArray[2, 2] == pt)
+            return true;
+        //Diagonal R-:
+        else if (boardArray[2, 0] == pt && boardArray[1, 1] == pt && boardArray[0, 2] == pt)
+            return true;
+        //Vertical Left
+        else if (boardArray[0, 0] == pt && boardArray[0, 1] == pt && boardArray[0, 2] == pt)
+            return true;
+        //Vertical Middle
+        else if (boardArray[1, 0] == pt && boardArray[1, 1] == pt && boardArray[1, 2] == pt)
+            return true;
+        //Vertical Right
+        else if (boardArray[2, 0] == pt && boardArray[2, 1] == pt && boardArray[2, 2] == pt)
+            return true;
+        else
+            return false;
     }
 }
