@@ -7,7 +7,6 @@ using UnityEngine.Experimental.ParticleSystemJobs;
 public class Gameboard : MonoBehaviour
 {
     private byte[,] boardArray;
-
     private const byte empty = 0;
     private const byte x = 1;
     private const byte o = 2;

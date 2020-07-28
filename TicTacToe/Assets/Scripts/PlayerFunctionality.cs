@@ -2,12 +2,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Tilemaps;
 using UnityEngine.UI;
 
 public class PlayerFunctionality : MonoBehaviour
 {
-    public GameObject gameBoard;
     private Gameboard gb;
+    private TileIndex ti;
+
+    public GameObject gameBoard;
     public Button b;
     public Text t;
     public string playerIndentity;
@@ -15,15 +18,20 @@ public class PlayerFunctionality : MonoBehaviour
     void Start()
     {
        gb = gameBoard.GetComponent<Gameboard>();
+       ti = GetComponent<TileIndex>();
     }
 
     public void SetSpace()
     {
-        if (gb.CheckSpaceIsEmpty(0, 0))
+        byte xPos, yPos;
+        xPos = ti.GetXPos();
+        yPos = ti.GetYPos();
+
+        if (gb.CheckSpaceIsEmpty(xPos, yPos))
         {
             Debug.Log("EMPTY");
-            t.text = playerIndentity;
-            b.interactable = false;
+            //t.text = playerIndentity;
+           // b.interactable = false;
         }
     }
 }
