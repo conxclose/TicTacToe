@@ -68,7 +68,7 @@ public class MinimaxNode
         }
     }
 
-    public int Evaluate(out MinimaxNode bestNode)
+    public int Evaluate(out MinimaxNode bestNode, int alpha, int beta)
     {
         bestNode = null;
 
@@ -82,16 +82,22 @@ public class MinimaxNode
 
         foreach (var child in Children)
         {
-            var eval = child.Evaluate(out var myBestNode);
+            var eval = child.Evaluate(out var myBestNode, alpha, beta);
             var oldRunningEval = runningEval;
 
             if (Player == (byte) 2)
             {
                 runningEval = Math.Max(runningEval, eval);
+                alpha = Math.Max(alpha, eval);
+                if (beta <= alpha)
+                    break;
             }
             else
             {
                 runningEval = Math.Min(runningEval, eval);
+                beta = Math.Min(beta, eval);
+                if (beta <= alpha)
+                    break;
             }
 
             if (runningEval != oldRunningEval)
@@ -99,6 +105,7 @@ public class MinimaxNode
                 bestNode = child;
                 BestNode = child;
             }
+
         }
 
         Score = runningEval;

@@ -12,7 +12,7 @@ public class TicTacToeAI : MonoBehaviour
     {
         MinimaxNode rootNode = new MinimaxNode {Player = 1, GameState = Gameboard.BoardArray.Clone() as byte[,]};
         GenerateNode(ref rootNode);
-        rootNode.Evaluate(out var bestNode);
+        rootNode.Evaluate(out var bestNode, int.MinValue, int.MaxValue);
         var index = bestNode.ModifiedCoordinate.Item2 * 3 + bestNode.ModifiedCoordinate.Item1;
         var childGameObject = GbO.transform.GetChild(index).gameObject;
         Gameboard.UpdateGameboard(childGameObject, 2);
@@ -24,7 +24,7 @@ public class TicTacToeAI : MonoBehaviour
         //generate all possible perm of board and assign to nodes
         //check current depth of the current node, if = limit break, if !- limit recurse generate node on new node
 
-        if (parentNode.Depth == 2)
+        if (parentNode.Depth == 5)
             return;
 
         for (var x = 0; x < 3; x++)
