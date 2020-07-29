@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Text;
 using UnityEngine;
 
 public class MinimaxNode 
@@ -9,7 +10,40 @@ public class MinimaxNode
     public byte Player;
     public byte[,] GameState = new byte[3,3];
     public (byte, byte) ModifiedCoordinate;
+    public int Score = 0;
+    public MinimaxNode BestNode = null;
 
+    public string BoardDisplay
+    {
+        get
+        {
+            var sb = new StringBuilder();
+
+            for (int y = 0; y < 3; y++)
+            {
+                for (int x = 0; x < 3; x++)
+                {
+                    var data = GameState[x, y];
+                    switch (data)
+                    {
+                        case 0:
+                            sb.Append("b");
+                            break;
+                        case 1:
+                            sb.Append("X");
+                            break;
+                        case 2:
+                            sb.Append("O");
+                            break;
+                    }
+                }
+
+                sb.Append("\n");
+            }
+
+            return sb.ToString();
+        }
+    }
     public int Depth
     {
         get
@@ -21,17 +55,16 @@ public class MinimaxNode
         }
     }
 
-    public int Score
+    private void DoStaticEval()
     {
-        get
+        if (CheckForWinningMove(1))
         {
-            if (CheckForWinningMove(1))
-                return 1;
+            Score = 10 - Depth;
+        }
 
-            if (CheckForWinningMove(2))
-                return -1;
-
-            return 0;
+        if (CheckForWinningMove(2))
+        {
+            Score = -10 + Depth;
         }
     }
 
@@ -39,17 +72,36 @@ public class MinimaxNode
     {
         bestNode = null;
 
-        if(Children.Count == 0)
+        if (Children.Count == 0)
+        {
+            DoStaticEval();
             return Score;
+        }
 
-        var runningEval = Player == 1 ? int.MinValue : int.MaxValue;
+        var runningEval = Player == (byte)2 ? int.MinValue : int.MaxValue;
 
         foreach (var child in Children)
         {
-            var eval = child.Evaluate(out var ignored);
-            runningEval = Player == 1 ? Math.Max(runningEval, eval) : Math.Min(runningEval, eval);
-            if (runningEval == eval) bestNode = child;
+            var eval = child.Evaluate(out var myBestNode);
+            var oldRunningEval = runningEval;
+
+            if (Player == (byte) 2)
+            {
+                runningEval = Math.Max(runningEval, eval);
+            }
+            else
+            {
+                runningEval = Math.Min(runningEval, eval);
+            }
+
+            if (runningEval != oldRunningEval)
+            {
+                bestNode = child;
+                BestNode = child;
+            }
         }
+
+        Score = runningEval;
 
         return runningEval;
     }

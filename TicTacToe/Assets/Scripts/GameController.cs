@@ -16,7 +16,7 @@ public class GameController : MonoBehaviour
     private Gameboard _gb;
     private TicTacToeAI _ai;
 
-    void Awake()
+    void Start()
     {
         SetGameControllerReference();
         GameOverPanel.SetActive(false);
@@ -55,11 +55,13 @@ public class GameController : MonoBehaviour
             GameOver();
             GameOverPanel.SetActive(true);
             GameOverText.text = GetPlayerMark() + " Wins!";
+            return;
         }
         else if(_moveCount >= 9)
         {
             GameOverPanel.SetActive(true);
             GameOverText.text = "It's a Draw!";
+            return;
         }
 
         if (_playerId == 1)
@@ -84,6 +86,7 @@ public class GameController : MonoBehaviour
         foreach (var t in ButtonList)
         {
             _moveCount = 0;
+            _playerId = 1;
             GameOverPanel.SetActive(false);
             GameOverText.text = "";
             t.GetComponentInParent<Button>().interactable = true;
