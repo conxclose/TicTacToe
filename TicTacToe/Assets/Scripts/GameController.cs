@@ -23,6 +23,7 @@ public class GameController : MonoBehaviour
         _playerId = 1;
         _gb = GameBoard.GetComponent<Gameboard>();
         _ai = this.gameObject.GetComponent<TicTacToeAI>();
+        _ai.DepthCap = 2;
     }
 
     void SetGameControllerReference()
@@ -91,7 +92,7 @@ public class GameController : MonoBehaviour
             GameOverText.text = "";
             t.GetComponentInParent<Button>().interactable = true;
             t.text = "";
-            _gb.ClearArray();
         }
+        _gb.ClearArray();
     }
 }

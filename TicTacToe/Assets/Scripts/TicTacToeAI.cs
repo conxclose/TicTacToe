@@ -7,6 +7,7 @@ public class TicTacToeAI : MonoBehaviour
     public GameController GameController;
     public Gameboard Gameboard;
     public GameObject GbO;
+    public int DepthCap;
 
     public void MakeMove()
     {
@@ -24,7 +25,7 @@ public class TicTacToeAI : MonoBehaviour
         //generate all possible perm of board and assign to nodes
         //check current depth of the current node, if = limit break, if !- limit recurse generate node on new node
 
-        if (parentNode.Depth == 5)
+        if (parentNode.Depth == DepthCap)
             return;
 
         for (var x = 0; x < 3; x++)

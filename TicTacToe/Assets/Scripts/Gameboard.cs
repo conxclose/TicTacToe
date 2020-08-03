@@ -3,11 +3,11 @@
 public class Gameboard : MonoBehaviour
 {
     public byte[,] BoardArray;
-    private const byte empty = 0;
+    private const byte Empty = 0;
     private const byte x = 1;
     private const byte o = 2;
 
-    private bool isEmpty;
+    private bool _isEmpty;
     
     public GameController GameController;
 
@@ -25,7 +25,7 @@ public class Gameboard : MonoBehaviour
         {
             for (var j = 0; j < 3; j++)
             {
-                BoardArray[i, j] = empty;
+                BoardArray[i, j] = Empty;
             }
         }
     }
@@ -36,7 +36,7 @@ public class Gameboard : MonoBehaviour
         {
             for (var j = 0; j < 3; j++)
             {
-                BoardArray[i, j] = empty;
+                BoardArray[i, j] = Empty;
             }
         }
     }
@@ -66,12 +66,12 @@ public class Gameboard : MonoBehaviour
 
     public bool CheckSpaceIsEmpty(byte xPos, byte yPos)
     {
-        if (BoardArray[xPos, yPos] == empty)
+        if (BoardArray[xPos, yPos] == Empty)
         {
-            isEmpty = true;
-            return isEmpty;
+            _isEmpty = true;
+            return _isEmpty;
         }
-        return isEmpty;
+        return _isEmpty;
     }
 
     public bool CheckForWinningMove(byte pt)
