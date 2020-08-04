@@ -1,6 +1,7 @@
 ScriptsOnlyBuild:
   usedScripts:
     Assembly-CSharp.dll:
+    - Difficulty
     - GameController
     - Gameboard
     - Gridspace
@@ -65,6 +66,8 @@ ScriptsOnlyBuild:
       Script: {instanceID: 11488}
     - Class: 114
       Script: {instanceID: 11542}
+    - Class: 114
+      Script: {instanceID: 15098}
     - Class: 115
       Script: {instanceID: 0}
     - Class: 128
@@ -172,7 +175,7 @@ ScriptsOnlyBuild:
     className: GridLayoutGroup
   - hash:
       serializedVersion: 2
-      Hash: 612cb832984e2dc2e8d1e0723211f9ac
+      Hash: 9e5cea55c815bbdcb3a2d1ff82c3b31a
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: Gridspace
@@ -514,7 +517,7 @@ ScriptsOnlyBuild:
     className: ToggleGroup
   - hash:
       serializedVersion: 2
-      Hash: 219c1875fdadf3f3e3ff28ea2069c61d
+      Hash: b76c3cade53be12d391b0db2ca02935c
     assemblyName: Assembly-CSharp.dll
     namespaceName: 
     className: TicTacToeAI
@@ -524,6 +527,12 @@ ScriptsOnlyBuild:
     assemblyName: Unity.Timeline.dll
     namespaceName: UnityEngine.Timeline
     className: PlayableTrack
+  - hash:
+      serializedVersion: 2
+      Hash: 10bcdee70c0d436be3efc2c94a8eba95
+    assemblyName: Assembly-CSharp.dll
+    namespaceName: 
+    className: Difficulty
   platform: 5
   scenePathNames:
   - Assets/Scenes/TicTacToe.unity

@@ -86,13 +86,13 @@ public class GameController : MonoBehaviour
     {
         foreach (var t in ButtonList)
         {
-            _moveCount = 0;
-            _playerId = 1;
-            GameOverPanel.SetActive(false);
-            GameOverText.text = "";
             t.GetComponentInParent<Button>().interactable = true;
             t.text = "";
         }
+        _moveCount = 0;
+        _playerId = 1;
+        GameOverPanel.SetActive(false);
+        GameOverText.text = "";
         _gb.ClearArray();
     }
 }

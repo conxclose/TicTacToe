@@ -7,33 +7,33 @@ using UnityEngine.UI;
 
 public class Gridspace : MonoBehaviour
 {
-    private Gameboard gb;
-    private TileIndex tileIndex;
-    private GameController gameController;
+    private Gameboard _gb;
+    private TileIndex _tileIndex;
+    private GameController _gameController;
 
-    public GameObject gameBoard;
-    public Button b;
-    public Text t;
+    public GameObject GameBoard;
+    public Button B;
+    public Text T;
 
     void Start()
     {
-       gb = gameBoard.GetComponent<Gameboard>();
-       tileIndex = GetComponent<TileIndex>();
+       _gb = GameBoard.GetComponent<Gameboard>();
+       _tileIndex = GetComponent<TileIndex>();
     }
 
     public void SetGameController(GameController controller)
     {
-        gameController = controller;
+        _gameController = controller;
     }
 
     public void SetSpace()
     {
-        gb.UpdateGameboard(this.gameObject,1);
+        _gb.UpdateGameboard(this.gameObject,1);
     }
 
     public void UpdateContent()
     {
-        t.text = gameController.GetPlayerMark();
-        b.interactable = false;
+        T.text = _gameController.GetPlayerMark();
+        B.interactable = false;
     }
 }

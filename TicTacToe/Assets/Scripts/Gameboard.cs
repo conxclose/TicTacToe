@@ -4,8 +4,8 @@ public class Gameboard : MonoBehaviour
 {
     public byte[,] BoardArray;
     private const byte Empty = 0;
-    private const byte x = 1;
-    private const byte o = 2;
+    private const byte X = 1;
+    private const byte O = 2;
 
     private bool _isEmpty;
     
@@ -46,9 +46,8 @@ public class Gameboard : MonoBehaviour
         var index = gridSpace.GetComponent<TileIndex>();
         var gs = gridSpace.GetComponent<Gridspace>();
 
-        byte xPos, yPos;
-        xPos = index.GetXPos();
-        yPos = index.GetYPos();
+        var xPos = index.GetXPos();
+        var yPos = index.GetYPos();
 
         if (!CheckSpaceIsEmpty(xPos, yPos))
         {
@@ -56,9 +55,9 @@ public class Gameboard : MonoBehaviour
         }
 
         if (id == 1)
-            BoardArray[xPos, yPos] = x;
+            BoardArray[xPos, yPos] = X;
         else if (id == 2)
-            BoardArray[xPos, yPos] = o;
+            BoardArray[xPos, yPos] = O;
 
         gs.UpdateContent();
         GameController.EndTurn();
