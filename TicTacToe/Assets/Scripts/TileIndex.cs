@@ -1,8 +1,8 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using UnityEngine.Experimental.PlayerLoop;
+﻿using UnityEngine;
 
+/// <summary>
+/// Description of the button's position in the visual gameboard
+/// </summary>
 public class TileIndex : MonoBehaviour
 {
     [SerializeField]

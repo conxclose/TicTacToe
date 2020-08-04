@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class Difficulty : MonoBehaviour
 {
+    /*
+     * Difficulty is set by capping the depth of the minimax searh tree
+     * The higher the depth, the more possibilities the minimax can play out to find lowest minimizing score
+     */
+
     public GameObject Gb;
     private TicTacToeAI _ai;
     private GameController _gc;
